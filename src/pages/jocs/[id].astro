@@ -1,0 +1,203 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { etiqueta, DEPENDENCIA, ESTATS } from '../../vocabularis';
+
+export async function getStaticPaths() {
+  const jocs = await getCollection('jocs');
+  return jocs.map((joc) => ({ params: { id: joc.id }, props: { joc } }));
+}
+
+interface Props { joc: CollectionEntry<'jocs'> }
+
+const { joc } = Astro.props;
+const d = joc.data;
+const { Content } = await render(joc);
+
+const data = (v: Date) => v.toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const nom = (llista: { id: string; etiqueta: string }[], id: string) =>
+  llista.find((t) => t.id === id)?.etiqueta ?? id;
+
+const persones = (llista: { nom: string; catala: boolean }[]) =>
+  llista.map((p) => p.nom).join(', ');
+
+const dePaisosCatalans = [...d.autors, ...d.illustradors]
+  .filter((p) => p.catala)
+  .map((p) => p.nom);
+
+const motiuText: Record<string, string> = {
+  autoria: 'Autoria catalana',
+  edicio: 'Edició en català',
+  manual: 'Manual en català',
+};
+
+const tipusManual: Record<string, string> = {
+  oficial: 'oficial',
+  comunitat: 'de la comunitat',
+  botiga: 'd’una botiga',
+};
+
+const totsManuals = [
+  ...d.manuals.map((m) => ({ ...m, de: null as string | null })),
+  ...d.expansions.flatMap((e) => e.manuals.map((m) => ({ ...m, de: e.titol }))),
+];
+---
+
+<Base titol={`${d.titol} — correjocs.cat`} descripcio={d.resum}>
+  <article class="fitxa">
+    <p class="tornar"><a href="/">← Tots els jocs</a></p>
+
+    <h1>{d.titol}</h1>
+    <p class="meta-gran">
+      {d.titol_original && d.titol_original !== d.titol ? `${d.titol_original} · ` : ''}
+      {persones(d.autors)}
+      {d.any_original ? ` · ${d.any_original}` : ''}
+    </p>
+
+    <ul class="tags">
+      {d.motius.map((m) => <li class="tag motiu">{motiuText[m]}</li>)}
+      {d.tipus.map((t) => <li class="tag">{etiqueta(t)}</li>)}
+    </ul>
+
+    <dl class="dades">
+      <div>
+        <dt>Jugadors</dt>
+        <dd>
+          {d.jugadors_min === d.jugadors_max ? d.jugadors_min : `${d.jugadors_min} a ${d.jugadors_max}`}
+          {d.jugadors_millor.length ? ` (millor a ${d.jugadors_millor.join(' o ')})` : ''}
+        </dd>
+      </div>
+
+      {(d.durada_min || d.durada_max) && (
+        <div>
+          <dt>Durada</dt>
+          <dd>{d.durada_min && d.durada_max && d.durada_min !== d.durada_max
+            ? `${d.durada_min}-${d.durada_max} minuts`
+            : `${d.durada_max ?? d.durada_min} minuts`}</dd>
+        </div>
+      )}
+
+      {d.edat_min && (
+        <div><dt>Edat</dt><dd>a partir de {d.edat_min} anys</dd></div>
+      )}
+
+      {d.complexitat && (
+        <div><dt>Complexitat</dt><dd>{d.complexitat} sobre 5</dd></div>
+      )}
+
+      <div>
+        <dt>Dependència de l'idioma</dt>
+        <dd>
+          {nom(DEPENDENCIA, d.dependencia_idioma)}
+          {d.dependencia_idioma === 'cap' ? ' — es juga igual en qualsevol llengua' : ''}
+        </dd>
+      </div>
+
+      {d.illustradors.length > 0 && (
+        <div><dt>Il·lustració</dt><dd>{persones(d.illustradors)}</dd></div>
+      )}
+
+      {dePaisosCatalans.length > 0 && (
+        <div>
+          <dt>Autoria dels Països Catalans</dt>
+          <dd>{dePaisosCatalans.join(', ')}</dd>
+        </div>
+      )}
+
+      {d.editorial_original && (
+        <div><dt>Editorial original</dt><dd>{d.editorial_original}</dd></div>
+      )}
+
+      {d.edicio_catalana && (
+        <div>
+          <dt>Edició en català</dt>
+          <dd>
+            {d.edicio_catalana.editorial}
+            {d.edicio_catalana.any ? `, ${d.edicio_catalana.any}` : ''}
+            {d.edicio_catalana.multillengua ? ' (caixa multilingüe)' : ''}
+          </dd>
+        </div>
+      )}
+
+      {d.mecaniques.length > 0 && (
+        <div><dt>Mecàniques</dt><dd>{d.mecaniques.map(etiqueta).join(', ')}</dd></div>
+      )}
+
+      {d.temes.length > 0 && (
+        <div><dt>Temes</dt><dd>{d.temes.map(etiqueta).join(', ')}</dd></div>
+      )}
+
+      <div>
+        <dt>Disponibilitat</dt>
+        <dd>
+          {nom(ESTATS, d.estat)}
+          {d.estat_comprovat ? ` (comprovat el ${data(d.estat_comprovat)})` : ''}
+        </dd>
+      </div>
+    </dl>
+
+    {totsManuals.length > 0 && (
+      <>
+        <h2>Manuals en català</h2>
+        <ul>
+          {totsManuals.map((m) => (
+            <li>
+              <a href={m.url} rel="noopener">
+                {m.de ? `Manual de ${m.de}` : 'Manual'} ({m.format.toUpperCase()})
+              </a>
+              {` — ${tipusManual[m.tipus]}`}
+              {m.autoria ? `, per ${m.autoria}` : ''}
+              {`. Comprovat el ${data(m.comprovat)}.`}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {d.expansions.length > 0 && (
+      <>
+        <h2>Expansions</h2>
+        <ul>
+          {d.expansions.map((e) => (
+            <li>
+              {e.titol}
+              {e.any ? ` (${e.any})` : ''}
+              {e.edicio_catalana ? ` — en català a ${e.edicio_catalana.editorial}` : ''}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {d.botigues.length > 0 && (
+      <>
+        <h2>On trobar-lo</h2>
+        <ul>
+          {d.botigues.map((b) => (
+            <li><a href={b.url} rel="noopener">{b.nom}</a></li>
+          ))}
+        </ul>
+        <p class="meta">Cap d'aquests enllaços no és d'afiliació.</p>
+      </>
+    )}
+
+    <div class="cos-text">
+      <Content />
+    </div>
+
+    {d.web_oficial && (
+      <p><a href={d.web_oficial} rel="noopener">Pàgina oficial del joc</a></p>
+    )}
+
+    {d.bgg?.id && (
+      <p class="meta">
+        <a href={`https://boardgamegeek.com/boardgame/${d.bgg.id}`} rel="noopener">
+          Fitxa a BoardGameGeek
+        </a>
+      </p>
+    )}
+
+    <p class="meta">Fitxa revisada el {data(d.revisat)}.</p>
+  </article>
+</Base>

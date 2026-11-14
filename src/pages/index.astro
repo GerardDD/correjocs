@@ -1,0 +1,358 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import {
+  MECANIQUES, TEMES, TIPUS, MOTIUS, DEPENDENCIA, ESTATS, etiqueta,
+} from '../vocabularis';
+
+const jocs = (await getCollection('jocs', ({ data }) => !data.esborrany)).sort(
+  (a, b) => a.data.titol.localeCompare(b.data.titol, 'ca'),
+);
+
+/** Text normalitzat (sense accents) per a la cerca lliure. */
+const normalitza = (s: string) =>
+  s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+const fitxes = jocs.map((joc, i) => {
+  const d = joc.data;
+  const anyOrdre = d.edicio_catalana?.any ?? d.any_original ?? 0;
+  // Per filtrar fem servir la durada màxima; per mostrar, la forquilla.
+  const durada = d.durada_max ?? d.durada_min ?? null;
+  const duradaText =
+    d.durada_min && d.durada_max && d.durada_min !== d.durada_max
+      ? `${d.durada_min}-${d.durada_max} min`
+      : durada
+        ? `${durada} min`
+        : null;
+  const cerca = normalitza(
+    [
+      d.titol,
+      d.titol_original ?? '',
+      ...d.altres_titols,
+      ...d.autors.map((a) => a.nom),
+      ...d.illustradors.map((a) => a.nom),
+      d.editorial_original ?? '',
+      d.edicio_catalana?.editorial ?? '',
+      ...d.expansions.map((e) => e.titol),
+    ].join(' '),
+  );
+  return { joc, d, anyOrdre, durada, duradaText, cerca, ordreTitol: i };
+});
+
+// Ordre alternatiu: per any, de més nou a més vell.
+const perAny = [...fitxes]
+  .sort((a, b) => b.anyOrdre - a.anyOrdre || a.ordreTitol - b.ordreTitol)
+  .reduce<Record<string, number>>((acc, f, i) => {
+    acc[f.joc.id] = i;
+    return acc;
+  }, {});
+
+const total = fitxes.length;
+---
+
+<Base titol="correjocs.cat — Jocs de taula en català">
+  <h1>Jocs de taula que es poden jugar en català</h1>
+  <p class="lede">
+    Jocs fets per autors dels Països Catalans, editats en català, o amb un manual
+    en català encara que la caixa no ho sigui. Filtra'ls com vulguis.
+  </p>
+
+  <div class="catalog">
+    <!-- ================= FILTRES ================= -->
+    <form class="filtres" id="filtres" autocomplete="off">
+      <h2>Filtres</h2>
+
+      <label class="camp">
+        <span>Cerca per títol, autoria o editorial</span>
+        <input type="search" id="q" name="q" placeholder="p. ex. Devir, Allué, Catan" />
+      </label>
+
+      <details class="grup" open>
+        <summary>Motiu</summary>
+        <div class="cos">
+          {MOTIUS.map((m) => (
+            <label class="check">
+              <input type="checkbox" data-grup="motiu" value={m.id} />
+              <span>{m.etiqueta}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+
+      <details class="grup" open>
+        <summary>A taula</summary>
+        <div class="cos">
+          <label class="camp">
+            <span>Som exactament</span>
+            <input type="number" id="jug" min="1" max="20" placeholder="jugadors" />
+          </label>
+          <label class="camp">
+            <span>Com a molt dura (minuts)</span>
+            <input type="number" id="durada" min="5" step="5" placeholder="minuts" />
+          </label>
+          <label class="camp">
+            <span>Apte a partir de (anys o menys)</span>
+            <input type="number" id="edat" min="2" max="18" placeholder="anys" />
+          </label>
+        </div>
+      </details>
+
+      <details class="grup" open>
+        <summary>Dependència de l'idioma</summary>
+        <div class="cos">
+          {DEPENDENCIA.map((d) => (
+            <label class="check">
+              <input type="checkbox" data-grup="dep" value={d.id} />
+              <span>{d.etiqueta}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+
+      <details class="grup">
+        <summary>Tipus</summary>
+        <div class="cos">
+          {TIPUS.map((t) => (
+            <label class="check">
+              <input type="checkbox" data-grup="tipus" value={t.id} />
+              <span>{t.etiqueta}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+
+      <details class="grup">
+        <summary>Mecàniques</summary>
+        <div class="cos">
+          {MECANIQUES.map((t) => (
+            <label class="check">
+              <input type="checkbox" data-grup="mec" value={t.id} />
+              <span>{t.etiqueta}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+
+      <details class="grup">
+        <summary>Temes</summary>
+        <div class="cos">
+          {TEMES.map((t) => (
+            <label class="check">
+              <input type="checkbox" data-grup="tema" value={t.id} />
+              <span>{t.etiqueta}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+
+      <details class="grup">
+        <summary>Disponibilitat</summary>
+        <div class="cos">
+          {ESTATS.map((t) => (
+            <label class="check">
+              <input type="checkbox" data-grup="estat" value={t.id} />
+              <span>{t.etiqueta}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+
+      <div class="botonera">
+        <button type="button" id="neteja">Neteja els filtres</button>
+      </div>
+    </form>
+
+    <!-- ================= RESULTATS ================= -->
+    <section>
+      <div class="barra">
+        <p id="compte" aria-live="polite">{total} jocs</p>
+        <label>
+          Ordena per
+          <select id="ordre">
+            <option value="titol">títol</option>
+            <option value="any">més recents</option>
+          </select>
+        </label>
+      </div>
+
+      <ul class="llista" id="llista">
+        {fitxes.map((f) => (
+          <li
+            data-cerca={f.cerca}
+            data-motiu={f.d.motius.join(' ')}
+            data-dep={f.d.dependencia_idioma}
+            data-tipus={f.d.tipus.join(' ')}
+            data-mec={f.d.mecaniques.join(' ')}
+            data-tema={f.d.temes.join(' ')}
+            data-estat={f.d.estat}
+            data-jmin={f.d.jugadors_min}
+            data-jmax={f.d.jugadors_max}
+            data-durada={f.durada ?? ''}
+            data-edat={f.d.edat_min ?? ''}
+            data-ord-titol={f.ordreTitol}
+            data-ord-any={perAny[f.joc.id]}
+          >
+            <article class="joc">
+              <h3><a href={`/jocs/${f.joc.id}/`}>{f.d.titol}</a></h3>
+              <p class="meta">
+                {f.d.autors.map((a) => a.nom).join(', ')}
+                {f.d.edicio_catalana ? ` · ${f.d.edicio_catalana.editorial}` : ''}
+                {f.anyOrdre ? ` · ${f.anyOrdre}` : ''}
+                {` · ${f.d.jugadors_min}-${f.d.jugadors_max} jugadors`}
+                {f.duradaText ? ` · ${f.duradaText}` : ''}
+              </p>
+              <p class="resum">{f.d.resum}</p>
+              <ul class="tags">
+                {f.d.motius.map((m) => (
+                  <li class="tag motiu">
+                    {m === 'autoria' ? 'Autoria catalana' : m === 'edicio' ? 'Edició en català' : 'Manual en català'}
+                  </li>
+                ))}
+                {f.d.tipus.map((t) => <li class="tag">{etiqueta(t)}</li>)}
+              </ul>
+            </article>
+          </li>
+        ))}
+      </ul>
+
+      <p class="buit" id="buit" hidden>
+        Cap joc no encaixa amb aquests filtres. Prova de treure'n algun.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  const form = document.getElementById('filtres') as HTMLFormElement;
+  const llista = document.getElementById('llista') as HTMLUListElement;
+  const compte = document.getElementById('compte') as HTMLElement;
+  const buit = document.getElementById('buit') as HTMLElement;
+  const ordre = document.getElementById('ordre') as HTMLSelectElement;
+  const q = document.getElementById('q') as HTMLInputElement;
+  const jug = document.getElementById('jug') as HTMLInputElement;
+  const durada = document.getElementById('durada') as HTMLInputElement;
+  const edat = document.getElementById('edat') as HTMLInputElement;
+
+  const items = Array.from(llista.children) as HTMLLIElement[];
+  const GRUPS = ['motiu', 'dep', 'tipus', 'mec', 'tema', 'estat'] as const;
+  type Grup = (typeof GRUPS)[number];
+
+  const caselles = (g: Grup) =>
+    Array.from(
+      form.querySelectorAll<HTMLInputElement>(`input[data-grup="${g}"]`),
+    );
+
+  const normalitza = (s: string) =>
+    s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+  function seleccionats(g: Grup): string[] {
+    return caselles(g).filter((c) => c.checked).map((c) => c.value);
+  }
+
+  /** Tots els valors del grup han de coincidir amb almenys un de l'element. */
+  function encaixa(valorsElement: string, triats: string[]): boolean {
+    if (triats.length === 0) return true;
+    const tinc = valorsElement.split(' ').filter(Boolean);
+    return triats.some((t) => tinc.includes(t));
+  }
+
+  function aplica(): void {
+    const text = normalitza(q.value.trim());
+    const nJug = jug.value ? Number(jug.value) : null;
+    const maxDurada = durada.value ? Number(durada.value) : null;
+    const maxEdat = edat.value ? Number(edat.value) : null;
+    const triats = Object.fromEntries(
+      GRUPS.map((g) => [g, seleccionats(g)]),
+    ) as Record<Grup, string[]>;
+
+    let visibles = 0;
+
+    for (const li of items) {
+      const d = li.dataset;
+      let ok = true;
+
+      if (text && !d.cerca!.includes(text)) ok = false;
+
+      if (ok) {
+        for (const g of GRUPS) {
+          if (!encaixa(d[g] ?? '', triats[g])) { ok = false; break; }
+        }
+      }
+
+      if (ok && nJug !== null) {
+        ok = Number(d.jmin) <= nJug && nJug <= Number(d.jmax);
+      }
+      if (ok && maxDurada !== null) {
+        ok = d.durada !== '' && Number(d.durada) <= maxDurada;
+      }
+      if (ok && maxEdat !== null) {
+        ok = d.edat !== '' && Number(d.edat) <= maxEdat;
+      }
+
+      li.hidden = !ok;
+      if (ok) visibles++;
+    }
+
+    compte.textContent =
+      visibles === items.length
+        ? `${visibles} jocs`
+        : `${visibles} de ${items.length} jocs`;
+    buit.hidden = visibles > 0;
+
+    desaURL(text, triats, nJug, maxDurada, maxEdat);
+  }
+
+  function ordena(): void {
+    const clau = ordre.value === 'any' ? 'ordAny' : 'ordTitol';
+    for (const li of items) li.style.order = li.dataset[clau] ?? '0';
+  }
+
+  function desaURL(
+    text: string,
+    triats: Record<Grup, string[]>,
+    nJug: number | null,
+    maxDurada: number | null,
+    maxEdat: number | null,
+  ): void {
+    const p = new URLSearchParams();
+    if (text) p.set('q', q.value.trim());
+    for (const g of GRUPS) if (triats[g].length) p.set(g, triats[g].join(','));
+    if (nJug !== null) p.set('jug', String(nJug));
+    if (maxDurada !== null) p.set('durada', String(maxDurada));
+    if (maxEdat !== null) p.set('edat', String(maxEdat));
+    if (ordre.value !== 'titol') p.set('ordre', ordre.value);
+    const cua = p.toString();
+    history.replaceState(null, '', cua ? `?${cua}` : location.pathname);
+  }
+
+  function llegeixURL(): void {
+    const p = new URLSearchParams(location.search);
+    q.value = p.get('q') ?? '';
+    jug.value = p.get('jug') ?? '';
+    durada.value = p.get('durada') ?? '';
+    edat.value = p.get('edat') ?? '';
+    if (p.get('ordre') === 'any') ordre.value = 'any';
+    for (const g of GRUPS) {
+      const vals = (p.get(g) ?? '').split(',').filter(Boolean);
+      if (!vals.length) continue;
+      // Obre el grup per fer visible que hi ha un filtre actiu.
+      for (const c of caselles(g)) {
+        if (vals.includes(c.value)) {
+          c.checked = true;
+          c.closest('details')?.setAttribute('open', '');
+        }
+      }
+    }
+  }
+
+  form.addEventListener('input', aplica);
+  ordre.addEventListener('change', () => { ordena(); aplica(); });
+  document.getElementById('neteja')!.addEventListener('click', () => {
+    form.reset();
+    aplica();
+  });
+
+  llegeixURL();
+  ordena();
+  aplica();
+</script>

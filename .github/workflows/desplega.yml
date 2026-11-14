@@ -1,0 +1,44 @@
+name: Compila i desplega a cdmon
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: desplegament
+  cancel-in-progress: true
+
+jobs:
+  desplega:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Si una fitxa incompleix l'esquema, la compilació falla aquí
+      # i no es puja res al servidor.
+      - run: npm run build
+
+      - name: Puja per FTP a /web
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.correjocs.cat
+          username: ${{ secrets.FTP_USUARI }}
+          password: ${{ secrets.FTP_CONTRASENYA }}
+          protocol: ftp
+          local-dir: ./dist/
+          server-dir: /web/
+          # Deixa un registre al servidor per pujar només el que ha canviat.
+          state-name: .ftp-desplegament.json
+          # Mai no esborris coses que no gestiona aquest repositori.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**

@@ -1,0 +1,53 @@
+# Vocabulari controlat de mecàniques.
+# L'id no s'ha de canviar mai un cop s'ha fet servir en una fitxa: és la URL
+# del filtre. L'etiqueta sí que es pot retocar.
+- id: colocacio-treballadors
+  etiqueta: Col·locació de treballadors
+- id: colocacio-peces
+  etiqueta: Col·locació de peces
+- id: construccio-ma
+  etiqueta: Construcció de mà
+- id: construccio-baralla
+  etiqueta: Construcció de baralla
+- id: draft
+  etiqueta: Draft
+- id: subhasta
+  etiqueta: Subhasta
+- id: negociacio
+  etiqueta: Negociació
+- id: gestio-recursos
+  etiqueta: Gestió de recursos
+- id: control-area
+  etiqueta: Control d'àrea
+- id: moviment-punts
+  etiqueta: Moviment per punts
+- id: enginy-deduccio
+  etiqueta: Enginy i deducció
+- id: memoria
+  etiqueta: Memòria
+- id: destresa
+  etiqueta: Destresa
+- id: rol-ocult
+  etiqueta: Rol ocult
+- id: cooperatiu
+  etiqueta: Cooperatiu
+- id: semicooperatiu
+  etiqueta: Semicooperatiu
+- id: un-contra-tots
+  etiqueta: Un contra tots
+- id: campanya
+  etiqueta: Campanya o legacy
+- id: escriptura-full
+  etiqueta: Escriptura en full
+- id: rodes-engranatges
+  etiqueta: Rodes i engranatges
+- id: tirar-i-premer
+  etiqueta: Tirar i prémer la sort
+- id: programacio-accions
+  etiqueta: Programació d'accions
+- id: rutes-xarxes
+  etiqueta: Rutes i xarxes
+- id: mosaic
+  etiqueta: Mosaic
+- id: paraules
+  etiqueta: Paraules i llenguatge

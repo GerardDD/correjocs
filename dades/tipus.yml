@@ -1,0 +1,21 @@
+# Vocabulari controlat de tipus de joc.
+- id: infantil
+  etiqueta: Infantil
+- id: familiar
+  etiqueta: Familiar
+- id: iniciacio
+  etiqueta: Iniciació
+- id: expert
+  etiqueta: Expert
+- id: festa
+  etiqueta: Festa
+- id: dos-jugadors
+  etiqueta: Dos jugadors
+- id: solitari
+  etiqueta: Solitari
+- id: abstracte
+  etiqueta: Abstracte
+- id: cartes
+  etiqueta: Cartes
+- id: rol
+  etiqueta: Rol

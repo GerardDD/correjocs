@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  titol: string;
+  descripcio?: string;
+}
+
+const { titol, descripcio = 'Jocs de taula fets per autors dels Països Catalans, editats en català o amb manual en català.' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const any = new Date().getFullYear();
+---
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{titol}</title>
+  <meta name="description" content={descripcio} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={titol} />
+  <meta property="og:description" content={descripcio} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content="ca_ES" />
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23b3301f'/><circle cx='11' cy='11' r='3' fill='%23fdf6ec'/><circle cx='21' cy='21' r='3' fill='%23fdf6ec'/><circle cx='21' cy='11' r='3' fill='%23fdf6ec'/><circle cx='11' cy='21' r='3' fill='%23fdf6ec'/></svg>"
+  />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="var(--accent)" />
+        <circle cx="11" cy="11" r="3" fill="var(--paper)" />
+        <circle cx="21" cy="11" r="3" fill="var(--paper)" />
+        <circle cx="11" cy="21" r="3" fill="var(--paper)" />
+        <circle cx="21" cy="21" r="3" fill="var(--paper)" />
+      </svg>
+      <a class="wordmark" href="/">correjocs<span>.cat</span></a>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <slot />
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>correjocs.cat · {any}</span>
+      <span><a href="/avis-legal/">Avís legal</a></span>
+    </div>
+  </footer>
+</body>
+</html>

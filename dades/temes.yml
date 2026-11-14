@@ -1,0 +1,37 @@
+# Vocabulari controlat de temes.
+- id: historia
+  etiqueta: Història
+- id: cultura-catalana
+  etiqueta: Catalunya i cultura pròpia
+- id: fantasia
+  etiqueta: Fantasia
+- id: ciencia-ficcio
+  etiqueta: Ciència-ficció
+- id: natura
+  etiqueta: Natura
+- id: animals
+  etiqueta: Animals
+- id: ciutat
+  etiqueta: Ciutat i urbanisme
+- id: comerc
+  etiqueta: Comerç
+- id: cuina
+  etiqueta: Cuina
+- id: esports
+  etiqueta: Esports
+- id: art
+  etiqueta: Art
+- id: ciencia
+  etiqueta: Ciència
+- id: misteri
+  etiqueta: Misteri i crim
+- id: terror
+  etiqueta: Terror
+- id: mitologia
+  etiqueta: Mitologia
+- id: vida-quotidiana
+  etiqueta: Vida quotidiana
+- id: llengua
+  etiqueta: Llengua
+- id: abstracte
+  etiqueta: Abstracte
