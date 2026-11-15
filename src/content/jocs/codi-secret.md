@@ -24,10 +24,11 @@ tipus: [festa, familiar]
 estat: desconegut
 resum: Dos equips, una graella de paraules i un cap d'espies que només pot dir una paraula per torn. Funciona a qualsevol taula.
 revisat: 2026-11-14
+verificar:
+  - "Fitxa de prova: cap dada comprovada contra l'editorial."
+  - "Any de l'edició catalana."
+  - "Disponibilitat actual."
 ---
-
-> ⚠️ **Fitxa de prova.** Cal verificar l'any de l'edició catalana i la
-> disponibilitat actual.
 
 L'exemple perfecte de per què aquest catàleg té sentit: és un joc que **només**
 es pot jugar en català si les cartes són en català. La dependència de l'idioma

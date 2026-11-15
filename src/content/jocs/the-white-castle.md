@@ -38,12 +38,11 @@ botigues:
 web_oficial: https://devir.es/the-white-castle
 resum: Un euro de col·locació de daus al castell de Himeji. El teu clan cuida els jardins, defensa la muralla o escala la cort del daimio. Caixa multilingüe amb reglament en català.
 revisat: 2026-11-15
+verificar:
+  - "Durada impresa a la caixa: les fonts van dels 40–80 min als 90."
+  - "Si les expansions Matcha i Bōeki es venen en català a dia d'avui."
+  - "Si Devir publica el reglament en català en PDF en algun lloc. Al seu web només hi penja la versió castellana."
 ---
-
-> ⚠️ **Dades per acabar de verificar amb l'editorial**: la durada impresa a la
-> caixa (les fonts van dels 40–80 min als 90), si les expansions Matcha i Bōeki
-> es venen en català a dia d'avui, i si Devir publica el reglament en català en
-> PDF en algun lloc. Devir només penja la versió castellana al seu web.
 
 El joc més venut de la història de Devir i, de retruc, un dels casos més clars
 de per què val la pena mirar l'etiqueta d'idiomes d'una caixa: la de *The White

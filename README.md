@@ -37,6 +37,29 @@ L'esquema és a `src/content.config.ts` i està documentat al projecte
 
 Les expansions no tenen fitxa pròpia: van dins la fitxa del joc base.
 
+## Dades pendents de verificar
+
+El cos de la fitxa és text publicat: no s'hi posen avisos interns. El que
+encara s'ha de contrastar amb l'editorial va al camp `verificar` de la
+capçalera, una llista de punts:
+
+```yaml
+verificar:
+  - "Any de l'edició catalana."
+  - "Si l'expansió es ven en català a dia d'avui."
+```
+
+**Aquest camp no es publica mai**: no surt a la pàgina del joc, ni al catàleg,
+ni al HTML. Serveix per generar la llista de feina:
+
+```bash
+npm run verificacions   # escriu VERIFICACIONS-PENDENTS.md
+```
+
+`VERIFICACIONS-PENDENTS.md` és un fitxer generat i tampoc es publica (Astro
+només publica `src/pages/` i `public/`). No s'edita a mà: quan un punt queda
+comprovat, es treu del `verificar:` de la fitxa i es torna a generar.
+
 ## Vocabularis
 
 A `dades/mecaniques.yml`, `dades/temes.yml` i `dades/tipus.yml`. Cada terme té

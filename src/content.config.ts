@@ -111,6 +111,11 @@ const jocs = defineCollection({
 
       revisat: z.coerce.date(),
       esborrany: z.boolean().default(false),
+
+      // Dades d'aquesta fitxa que encara s'han de comprovar amb l'editorial.
+      // NO es publica mai: no surt a la pàgina del joc ni al catàleg. Serveix
+      // per generar VERIFICACIONS-PENDENTS.md amb `npm run verificacions`.
+      verificar: z.array(z.string()).default([]),
     })
     .refine((d) => d.jugadors_max >= d.jugadors_min, {
       message: 'jugadors_max ha de ser més gran o igual que jugadors_min',

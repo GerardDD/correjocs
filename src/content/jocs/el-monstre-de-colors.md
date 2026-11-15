@@ -22,10 +22,12 @@ tipus: [infantil, familiar]
 estat: desconegut
 resum: Un joc per a canalla petita sobre identificar i ordenar les emocions, a partir de l'àlbum il·lustrat d'Anna Llenas.
 revisat: 2026-11-14
+verificar:
+  - "Fitxa de prova: cap dada comprovada contra l'editorial."
+  - "Autoria exacta."
+  - "Nombre de jugadors i durada."
+  - "Disponibilitat actual."
 ---
-
-> ⚠️ **Fitxa de prova.** Cal verificar l'autoria exacta, el nombre de jugadors,
-> la durada i la disponibilitat.
 
 Exemple de fitxa amb dos motius alhora: hi ha autoria catalana i hi ha edició en
 català. I amb dependència de l'idioma `cap`, cosa que vol dir que es juga igual

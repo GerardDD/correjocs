@@ -27,11 +27,12 @@ tipus: [familiar, iniciacio]
 estat: desconegut
 resum: El clàssic que va obrir la porta al joc modern. Colonitzar una illa negociant fusta, pedra i ovelles amb qui seu al costat.
 revisat: 2026-11-14
+verificar:
+  - "Fitxa de prova: cap dada comprovada contra l'editorial."
+  - "Any de l'edició catalana."
+  - "Expansions disponibles en català."
+  - "Disponibilitat actual."
 ---
-
-> ⚠️ **Fitxa de prova.** Les dades s'han d'acabar de verificar contra l'editorial
-> abans de publicar-la: any de l'edició catalana, expansions disponibles en
-> català i disponibilitat actual.
 
 Catan és el joc que va ensenyar a mig món que els jocs de taula podien ser una
 altra cosa. Cada partida comença amb una illa diferent i acaba, gairebé sempre,
