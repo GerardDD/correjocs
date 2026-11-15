@@ -3,6 +3,8 @@
 # del filtre. L'etiqueta sí que es pot retocar.
 - id: colocacio-treballadors
   etiqueta: Col·locació de treballadors
+- id: colocacio-daus
+  etiqueta: Col·locació de daus
 - id: colocacio-peces
   etiqueta: Col·locació de peces
 - id: construccio-ma
