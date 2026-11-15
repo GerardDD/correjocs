@@ -48,6 +48,8 @@ const perAny = [...fitxes]
   }, {});
 
 const total = fitxes.length;
+/** "1 joc" / "7 jocs": amb una sola fitxa publicada el plural cantava. */
+const compteText = (n: number) => `${n} ${n === 1 ? 'joc' : 'jocs'}`;
 ---
 
 <Base titol="correjocs.cat — Jocs de taula en català">
@@ -165,7 +167,7 @@ const total = fitxes.length;
     <!-- ================= RESULTATS ================= -->
     <section>
       <div class="barra">
-        <p id="compte" aria-live="polite">{total} jocs</p>
+        <p id="compte" aria-live="polite">{compteText(total)}</p>
         <label>
           Ordena per
           <select id="ordre">
@@ -293,10 +295,11 @@ const total = fitxes.length;
       if (ok) visibles++;
     }
 
+    const plural = (n: number) => (n === 1 ? 'joc' : 'jocs');
     compte.textContent =
       visibles === items.length
-        ? `${visibles} jocs`
-        : `${visibles} de ${items.length} jocs`;
+        ? `${visibles} ${plural(visibles)}`
+        : `${visibles} de ${items.length} ${plural(items.length)}`;
     buit.hidden = visibles > 0;
 
     desaURL(text, triats, nJug, maxDurada, maxEdat);

@@ -24,6 +24,7 @@ tipus: [festa, familiar]
 estat: desconegut
 resum: Dos equips, una graella de paraules i un cap d'espies que només pot dir una paraula per torn. Funciona a qualsevol taula.
 revisat: 2026-11-14
+esborrany: true
 verificar:
   - "Fitxa de prova: cap dada comprovada contra l'editorial."
   - "Any de l'edició catalana."

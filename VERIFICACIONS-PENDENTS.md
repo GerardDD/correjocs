@@ -9,7 +9,7 @@ fitxa; per canviar-hi res, canvia la fitxa i torna a executar
 Aquestes notes **no es publiquen**: ni a la pàgina del joc ni al catàleg.
 Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 
-## Catan
+## Catan *(esborrany, no publicada)*
 
 `src/content/jocs/catan.md` — <https://correjocs.cat/jocs/catan/>
 
@@ -18,7 +18,7 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Expansions disponibles en català.
 - [ ] Disponibilitat actual.
 
-## Codi Secret
+## Codi Secret *(esborrany, no publicada)*
 
 `src/content/jocs/codi-secret.md` — <https://correjocs.cat/jocs/codi-secret/>
 
@@ -26,7 +26,7 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Any de l'edició catalana.
 - [ ] Disponibilitat actual.
 
-## El monstre de colors
+## El monstre de colors *(esborrany, no publicada)*
 
 `src/content/jocs/el-monstre-de-colors.md` — <https://correjocs.cat/jocs/el-monstre-de-colors/>
 

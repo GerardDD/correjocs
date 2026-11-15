@@ -27,6 +27,7 @@ tipus: [familiar, iniciacio]
 estat: desconegut
 resum: El clàssic que va obrir la porta al joc modern. Colonitzar una illa negociant fusta, pedra i ovelles amb qui seu al costat.
 revisat: 2026-11-14
+esborrany: true
 verificar:
   - "Fitxa de prova: cap dada comprovada contra l'editorial."
   - "Any de l'edició catalana."

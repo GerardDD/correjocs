@@ -22,6 +22,7 @@ tipus: [infantil, familiar]
 estat: desconegut
 resum: Un joc per a canalla petita sobre identificar i ordenar les emocions, a partir de l'àlbum il·lustrat d'Anna Llenas.
 revisat: 2026-11-14
+esborrany: true
 verificar:
   - "Fitxa de prova: cap dada comprovada contra l'editorial."
   - "Autoria exacta."

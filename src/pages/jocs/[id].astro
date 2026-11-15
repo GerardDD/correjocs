@@ -5,7 +5,9 @@ import Base from '../../layouts/Base.astro';
 import { etiqueta, DEPENDENCIA, ESTATS } from '../../vocabularis';
 
 export async function getStaticPaths() {
-  const jocs = await getCollection('jocs');
+  // `esborrany: true` no genera pàgina. Sense aquest filtre la fitxa
+  // desapareixia del catàleg però la seva URL seguia publicada.
+  const jocs = await getCollection('jocs', ({ data }) => !data.esborrany);
   return jocs.map((joc) => ({ params: { id: joc.id }, props: { joc } }));
 }
 
