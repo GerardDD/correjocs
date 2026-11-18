@@ -4,7 +4,7 @@
 fitxa; per canviar-hi res, canvia la fitxa i torna a executar
 `npm run verificacions`.
 
-*Generat el 18 de novembre del 2026 — 102 punts en 26 fitxes.*
+*Generat el 18 de novembre del 2026 — 86 punts en 22 fitxes.*
 
 Aquestes notes **no es publiquen**: ni a la pàgina del joc ni al catàleg.
 Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
@@ -88,15 +88,6 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Any de l'edició catalana.
 - [ ] Disponibilitat actual.
 
-## Dodo
-
-`src/content/jocs/dodo.md` — <https://correjocs.cat/jocs/dodo/>
-
-- [ ] Editorial i any originals.
-- [ ] Si l'edició de Devir és en català o multilingüe: Totjoc la té catalogada amb data 01/07/2022.
-- [ ] Edat: VilaWeb diu a partir de 6 anys; Totjoc no ho indica.
-- [ ] Disponibilitat actual.
-
 ## El monstre de colors *(esborrany, no publicada)*
 
 `src/content/jocs/el-monstre-de-colors.md` — <https://correjocs.cat/jocs/el-monstre-de-colors/>
@@ -113,14 +104,6 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Edició amb el títol en català (El niu del cucut): quina editorial la fa i si el reglament hi és en català. Si es confirma, afegir el motiu edicio.
 - [ ] Disponibilitat actual.
 
-## Gardens
-
-`src/content/jocs/gardens.md` — <https://correjocs.cat/jocs/gardens/>
-
-- [ ] Origen de Perepau Llistosella: NacióDigital l'inclou en un recull de jocs creats per catalans el 2014, però no en diu la població. És la mateixa font feble que la d'Ivan Prat.
-- [ ] Si l'edició de Devir inclou el català. Si és així, afegir el motiu edicio.
-- [ ] Disponibilitat: és un joc del 2014 i probablement està descatalogat.
-
 ## La Fallera Calavera
 
 `src/content/jocs/la-fallera-calavera.md` — <https://correjocs.cat/jocs/la-fallera-calavera/>
@@ -130,15 +113,6 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] El reglament enllaçat és el de la 9a edició i està allotjat a Tabletopia. Confirmar que el format sigui PDF i si Zombi Paella el té al seu web.
 - [ ] Mecàniques sense omplir: el vocabulari no té cap terme per a la gestió de mà ni per a la col·lecció de sèries.
 
-## Metro
-
-`src/content/jocs/metro.md` — <https://correjocs.cat/jocs/metro/>
-
-- [ ] Editorial i any originals (és un joc de Dirk Henn reeditat; Totjoc data l'edició de Devir a 01/09/2024).
-- [ ] Edat mínima i descripció de com es juga: Totjoc no en dona.
-- [ ] Si l'edició de Devir és en català o multilingüe.
-- [ ] Disponibilitat actual.
-
 ## Nan Cucut
 
 `src/content/jocs/nan-cucut.md` — <https://correjocs.cat/jocs/nan-cucut/>
@@ -146,16 +120,6 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Origen de Joan Marc Clofent: és autor i editor de jocs en català, però cap font no en diu la població. Si és dels Països Catalans, marcar-lo i afegir el motiu autoria.
 - [ ] Durada i edat: Totjoc diu 30 min i +7 anys; VilaWeb parla de partides ràpides a partir de 8 anys i una altra fitxa diu 15-25 min.
 - [ ] Nom exacte del segell editorial (duestasses).
-- [ ] Disponibilitat actual.
-
-## Optimus
-
-`src/content/jocs/optimus.md` — <https://correjocs.cat/jocs/optimus/>
-
-- [ ] Editorial i any originals, i any de l'edició de Devir.
-- [ ] Edat mínima i descripció de com es juga: Totjoc només diu 'joc d'estratègia amb daus'.
-- [ ] Mecàniques i temes sense omplir per falta de font.
-- [ ] Si l'edició de Devir és en català o multilingüe.
 - [ ] Disponibilitat actual.
 
 ## Paella Park
