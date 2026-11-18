@@ -4,7 +4,7 @@
 fitxa; per canviar-hi res, canvia la fitxa i torna a executar
 `npm run verificacions`.
 
-*Generat el 16 de novembre del 2026 — 53 punts en 14 fitxes.*
+*Generat el 18 de novembre del 2026 — 102 punts en 26 fitxes.*
 
 Aquestes notes **no es publiquen**: ni a la pàgina del joc ni al catàleg.
 Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
@@ -17,6 +17,15 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Si l'edició és només en català o multilingüe.
 - [ ] Dependència de l'idioma: posada com a mitjana perquè les cartes són d'esdeveniments, sense haver-les vist.
 - [ ] Disponibilitat: és un joc del 2014 i probablement està descatalogat.
+
+## Alakazum! Bruixes i tradicions
+
+`src/content/jocs/alakazum.md` — <https://correjocs.cat/jocs/alakazum/>
+
+- [ ] Llengües de l'edició: Zombi Paella diu que Alakazum! és el seu millor exemple de compromís amb el valencià, el basc i el gallec. Confirmar que hi ha edició en català o valencià i afegir el motiu edicio.
+- [ ] Durada: no s'ha trobat per al joc base (la segona part és de 40 min).
+- [ ] Expansions: n'hi ha almenys una amb títol en català (Gripau Caòtic, 2019). Confirmar que sigui expansió i no joc independent abans de llistar-la.
+- [ ] Dependència de l'idioma: posada com a mitjana sense haver vist les cartes.
 
 ## Barcelona
 
@@ -44,6 +53,24 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Dependència de l'idioma: posada com a baixa sense haver vist les cartes.
 - [ ] Disponibilitat: és un joc del 2014 finançat per Verkami.
 
+## Castellers!
+
+`src/content/jocs/castellers-2017.md` — <https://correjocs.cat/jocs/castellers-2017/>
+
+- [ ] Que l'edició en català existeixi: Devir té una fitxa de producte 'Castellers (Catalan)' al seu web americà, no s'ha vist la caixa.
+- [ ] Origen de Dani Gómez: coautor habitual d'Allué, però cap font no en diu la població.
+- [ ] Origen d'Albert Monteys (dibuixant conegut, però sense font recollida).
+- [ ] Mecàniques sense omplir: és un joc de gestió de mà i el vocabulari no en té cap terme.
+- [ ] Disponibilitat actual.
+
+## Castle Party
+
+`src/content/jocs/castle-party.md` — <https://correjocs.cat/jocs/castle-party/>
+
+- [ ] Si l'edició en català és pròpia o multilingüe: Totjoc la té catalogada (data de publicació 25/10/2021), però no diu quines llengües porta la caixa.
+- [ ] Dependència de l'idioma: posada com a baixa sense haver vist les cartes.
+- [ ] Disponibilitat actual.
+
 ## Catan *(esborrany, no publicada)*
 
 `src/content/jocs/catan.md` — <https://correjocs.cat/jocs/catan/>
@@ -59,6 +86,15 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 
 - [ ] Fitxa de prova: cap dada comprovada contra l'editorial.
 - [ ] Any de l'edició catalana.
+- [ ] Disponibilitat actual.
+
+## Dodo
+
+`src/content/jocs/dodo.md` — <https://correjocs.cat/jocs/dodo/>
+
+- [ ] Editorial i any originals.
+- [ ] Si l'edició de Devir és en català o multilingüe: Totjoc la té catalogada amb data 01/07/2022.
+- [ ] Edat: VilaWeb diu a partir de 6 anys; Totjoc no ho indica.
 - [ ] Disponibilitat actual.
 
 ## El monstre de colors *(esborrany, no publicada)*
@@ -77,6 +113,14 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Edició amb el títol en català (El niu del cucut): quina editorial la fa i si el reglament hi és en català. Si es confirma, afegir el motiu edicio.
 - [ ] Disponibilitat actual.
 
+## Gardens
+
+`src/content/jocs/gardens.md` — <https://correjocs.cat/jocs/gardens/>
+
+- [ ] Origen de Perepau Llistosella: NacióDigital l'inclou en un recull de jocs creats per catalans el 2014, però no en diu la població. És la mateixa font feble que la d'Ivan Prat.
+- [ ] Si l'edició de Devir inclou el català. Si és així, afegir el motiu edicio.
+- [ ] Disponibilitat: és un joc del 2014 i probablement està descatalogat.
+
 ## La Fallera Calavera
 
 `src/content/jocs/la-fallera-calavera.md` — <https://correjocs.cat/jocs/la-fallera-calavera/>
@@ -85,6 +129,53 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Si l'edició original de 2014 encara es ven o només la Deluxe (108 cartes, 20 €).
 - [ ] El reglament enllaçat és el de la 9a edició i està allotjat a Tabletopia. Confirmar que el format sigui PDF i si Zombi Paella el té al seu web.
 - [ ] Mecàniques sense omplir: el vocabulari no té cap terme per a la gestió de mà ni per a la col·lecció de sèries.
+
+## Metro
+
+`src/content/jocs/metro.md` — <https://correjocs.cat/jocs/metro/>
+
+- [ ] Editorial i any originals (és un joc de Dirk Henn reeditat; Totjoc data l'edició de Devir a 01/09/2024).
+- [ ] Edat mínima i descripció de com es juga: Totjoc no en dona.
+- [ ] Si l'edició de Devir és en català o multilingüe.
+- [ ] Disponibilitat actual.
+
+## Nan Cucut
+
+`src/content/jocs/nan-cucut.md` — <https://correjocs.cat/jocs/nan-cucut/>
+
+- [ ] Origen de Joan Marc Clofent: és autor i editor de jocs en català, però cap font no en diu la població. Si és dels Països Catalans, marcar-lo i afegir el motiu autoria.
+- [ ] Durada i edat: Totjoc diu 30 min i +7 anys; VilaWeb parla de partides ràpides a partir de 8 anys i una altra fitxa diu 15-25 min.
+- [ ] Nom exacte del segell editorial (duestasses).
+- [ ] Disponibilitat actual.
+
+## Optimus
+
+`src/content/jocs/optimus.md` — <https://correjocs.cat/jocs/optimus/>
+
+- [ ] Editorial i any originals, i any de l'edició de Devir.
+- [ ] Edat mínima i descripció de com es juga: Totjoc només diu 'joc d'estratègia amb daus'.
+- [ ] Mecàniques i temes sense omplir per falta de font.
+- [ ] Si l'edició de Devir és en català o multilingüe.
+- [ ] Disponibilitat actual.
+
+## Paella Park
+
+`src/content/jocs/paella-park.md` — <https://correjocs.cat/jocs/paella-park/>
+
+- [ ] Llengües de la caixa: una botiga la ven com a edició ES/EN/VA. Confirmar que el valencià hi sigui.
+- [ ] Origen de la il·lustradora Esther Mendez.
+- [ ] Dependència de l'idioma: posada com a baixa sense haver vist les cartes.
+- [ ] Disponibilitat actual: la Botiga de VilaWeb el té al catàleg.
+
+## Panots
+
+`src/content/jocs/panots.md` — <https://correjocs.cat/jocs/panots/>
+
+- [ ] Origen de Nico Cardona.
+- [ ] Origen de Joan Juncosa: una ressenya el descriu com a artista barceloní. Confirmar-ho amb una segona font.
+- [ ] Editorial i any: una ressenya parla de Too Bad Games i 2025; la majoria de fonts, de Zacatrus i 2024.
+- [ ] Que la caixa porti el català: ho diuen una botiga (Mathom) i una ressenya; no s'ha vist la caixa.
+- [ ] Disponibilitat actual.
 
 ## Ratzzia
 
@@ -95,12 +186,30 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 - [ ] Disponibilitat actual a botigues.
 - [ ] El reglament és el de Devir però està allotjat a Tabletopia, no al web de l'editorial. Confirmar que el format sigui PDF.
 
+## Shikoku
+
+`src/content/jocs/shikoku.md` — <https://correjocs.cat/jocs/shikoku/>
+
+- [ ] Si l'edició de GDM Games inclou el català.
+- [ ] Origen de la il·lustradora Amelia Sales.
+- [ ] Dependència de l'idioma: posada com a cap sense haver vist les cartes.
+- [ ] Disponibilitat actual a l'Estat (fora la reedita Grand Gamers Guild).
+
 ## Take a Seat
 
 `src/content/jocs/take-a-seat.md` — <https://correjocs.cat/jocs/take-a-seat/>
 
 - [ ] Si el reglament de Salt & Pepper Games inclou el català.
 - [ ] Origen de l'il·lustrador Carlos Ureta.
+- [ ] Disponibilitat actual.
+
+## The Red Cathedral
+
+`src/content/jocs/the-red-cathedral.md` — <https://correjocs.cat/jocs/the-red-cathedral/>
+
+- [ ] Any de publicació: el reglament català porta data de juny del 2020, però el text no diu l'any de l'edició.
+- [ ] Caixa multilingüe amb català: ho diu una botiga (El Taller del Modelista), no s'ha vist la caixa.
+- [ ] Mecàniques: hi ha un rondell amb daus que el vocabulari no recull bé.
 - [ ] Disponibilitat actual.
 
 ## The White Castle
