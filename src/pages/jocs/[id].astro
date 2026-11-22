@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { etiqueta, DEPENDENCIA, ESTATS } from '../../vocabularis';
+import { opinionsPerJoc, notaText } from '../../opinions';
 
 export async function getStaticPaths() {
   // `esborrany: true` no genera pàgina. Sense aquest filtre la fitxa
@@ -16,6 +17,10 @@ interface Props { joc: CollectionEntry<'jocs'> }
 const { joc } = Astro.props;
 const d = joc.data;
 const { Content } = await render(joc);
+
+const opinio = (await opinionsPerJoc()).get(joc.id);
+const o = opinio?.data;
+const OpinioText = opinio ? (await render(opinio)).Content : null;
 
 const data = (v: Date) => v.toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 const nom = (llista: { id: string; etiqueta: string }[], id: string) =>
@@ -187,6 +192,62 @@ const totsManuals = [
     <div class="cos-text">
       <Content />
     </div>
+
+    {o && OpinioText && (
+      <section class="opinio-bloc" id="opinio" aria-labelledby="opinio-titol">
+        <h2 id="opinio-titol">L'opinió de {o.autoria}</h2>
+        <p class="opinio-avis">
+          Opinió personal. Les dades de més amunt són verificables; això no.
+        </p>
+
+        <p class="veredicte">{o.veredicte}</p>
+
+        {o.nota && (
+          <p class="nota">Nota: <strong>{notaText(o.nota)}</strong></p>
+        )}
+
+        {(o.partides || o.jugadors_provats.length > 0 || o.ideal_per) && (
+          <dl class="dades">
+            {o.partides && (
+              <div><dt>Partides jugades</dt><dd>{o.partides}</dd></div>
+            )}
+            {o.jugadors_provats.length > 0 && (
+              <div>
+                <dt>Provat a</dt>
+                <dd>{o.jugadors_provats.join(', ').replace(/, (\d+)$/, ' i $1')} jugadors</dd>
+              </div>
+            )}
+            {o.ideal_per && (
+              <div><dt>Ideal per a</dt><dd>{o.ideal_per}</dd></div>
+            )}
+          </dl>
+        )}
+
+        {(o.a_favor.length > 0 || o.en_contra.length > 0) && (
+          <div class="pros-contres">
+            {o.a_favor.length > 0 && (
+              <div>
+                <h3>M'agrada</h3>
+                <ul>{o.a_favor.map((p) => <li>{p}</li>)}</ul>
+              </div>
+            )}
+            {o.en_contra.length > 0 && (
+              <div>
+                <h3>No tant</h3>
+                <ul>{o.en_contra.map((p) => <li>{p}</li>)}</ul>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div class="cos-text"><OpinioText /></div>
+
+        <p class="meta">
+          Escrita el {data(o.data)}{o.actualitzada ? `, actualitzada el ${data(o.actualitzada)}` : ''}.
+          {' '}<a href="/opinions/">Totes les opinions</a>
+        </p>
+      </section>
+    )}
 
     {d.web_oficial && (
       <p><a href={d.web_oficial} rel="noopener">Pàgina oficial del joc</a></p>

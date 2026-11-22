@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { opinionsPerJoc, notaText } from '../../opinions';
+
+const opinions = await opinionsPerJoc();
+const jocs = new Map(
+  (await getCollection('jocs', ({ data }) => !data.esborrany)).map((j) => [j.id, j]),
+);
+
+const darrera = (o: { data: { data: Date; actualitzada?: Date } }) =>
+  (o.data.actualitzada ?? o.data.data).getTime();
+
+const llista = [...opinions.values()]
+  .sort((a, b) => darrera(b) - darrera(a))
+  .map((o) => ({ o, joc: jocs.get(o.id)! }));
+
+const data = (v: Date) =>
+  v.toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  titol="Opinions — correjocs.cat"
+  descripcio="Opinions personals sobre jocs de taula que es poden jugar en català."
+>
+  <h1>Opinions</h1>
+  <p class="lede">
+    El que en pensem després de jugar-hi. Són opinions personals, separades de
+    les dades del catàleg: les fitxes diuen què és cada joc; això, si ens ha
+    agradat.
+  </p>
+
+  {llista.length === 0 ? (
+    <p class="buit">Encara no hi ha cap opinió publicada.</p>
+  ) : (
+    <ul class="llista">
+      {llista.map(({ o, joc }) => (
+        <li>
+          <article class="joc">
+            <h3><a href={`/jocs/${joc.id}/#opinio`}>{joc.data.titol}</a></h3>
+            <p class="meta">
+              {o.data.autoria} · {data(o.data.actualitzada ?? o.data.data)}
+              {o.data.nota ? ` · ${notaText(o.data.nota)}` : ''}
+            </p>
+            <p class="resum">{o.data.veredicte}</p>
+          </article>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>

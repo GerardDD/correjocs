@@ -156,4 +156,57 @@ const jocs = defineCollection({
     ),
 });
 
-export const collections = { jocs };
+// ---------------------------------------------------------------------------
+// Opinions personals
+//
+// Un fitxer per joc a src/content/opinions/, amb EL MATEIX NOM que la fitxa:
+// l'opinió de src/content/jocs/panda-spin.md és src/content/opinions/panda-spin.md.
+// Van a part de les fitxes perquè les fitxes són dades que es poden verificar i
+// una opinió no: així no es barregen mai. Si una opinió no té fitxa, la
+// compilació falla (ho comprova src/opinions.ts).
+//
+// Els fitxers que comencen per "_" (com _plantilla.md) no es carreguen.
+// Per crear-ne una: npm run opinio -- <nom-de-la-fitxa>
+// ---------------------------------------------------------------------------
+
+const opinions = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/opinions' }),
+  schema: z
+    .object({
+      // Quan l'has escrita i, si la tornes a tocar de veritat, quan.
+      data: z.coerce.date(),
+      actualitzada: z.coerce.date().optional(),
+
+      // Qui la signa. Per defecte, el titular del web.
+      autoria: z.string().default('MrBr.'),
+
+      // Una frase que resumeixi l'opinió. Surt a la llista d'opinions.
+      veredicte: z.string().max(160),
+
+      // Nota opcional d'1 a 5 (admet mitges: 3.5). Si no la poses, no surt.
+      nota: z
+        .number()
+        .min(1)
+        .max(5)
+        .multipleOf(0.5)
+        .optional(),
+
+      // Context que dona credibilitat a l'opinió. Tot opcional.
+      partides: z.number().int().min(1).optional(),
+      jugadors_provats: z.array(z.number().int().min(1)).default([]),
+      // Per a qui el recomanaries, en una frase: "famílies amb criatures de 8 anys".
+      ideal_per: z.string().optional(),
+
+      a_favor: z.array(z.string()).default([]),
+      en_contra: z.array(z.string()).default([]),
+
+      // Mentre hi treballes: no es publica enlloc.
+      esborrany: z.boolean().default(false),
+    })
+    .refine((d) => !d.actualitzada || d.actualitzada >= d.data, {
+      message: "'actualitzada' no pot ser anterior a 'data'",
+      path: ['actualitzada'],
+    }),
+});
+
+export const collections = { jocs, opinions };

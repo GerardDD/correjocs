@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import {
   MECANIQUES, TEMES, TIPUS, MOTIUS, DEPENDENCIA, ESTATS, etiqueta,
 } from '../vocabularis';
+import { opinionsPerJoc } from '../opinions';
 
 const jocs = (await getCollection('jocs', ({ data }) => !data.esborrany)).sort(
   (a, b) => a.data.titol.localeCompare(b.data.titol, 'ca'),
@@ -12,6 +13,8 @@ const jocs = (await getCollection('jocs', ({ data }) => !data.esborrany)).sort(
 /** Text normalitzat (sense accents) per a la cerca lliure. */
 const normalitza = (s: string) =>
   s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+const opinions = await opinionsPerJoc();
 
 const fitxes = jocs.map((joc, i) => {
   const d = joc.data;
@@ -36,7 +39,8 @@ const fitxes = jocs.map((joc, i) => {
       ...d.expansions.map((e) => e.titol),
     ].join(' '),
   );
-  return { joc, d, anyOrdre, durada, duradaText, cerca, ordreTitol: i };
+  const teOpinio = opinions.has(joc.id);
+  return { joc, d, anyOrdre, durada, duradaText, cerca, ordreTitol: i, teOpinio };
 });
 
 // Ordre alternatiu: per any, de més nou a més vell.
@@ -147,6 +151,15 @@ const compteText = (n: number) => `${n} ${n === 1 ? 'joc' : 'jocs'}`;
         </div>
       </details>
 
+      {opinions.size > 0 && (
+        <div class="grup">
+          <label class="check">
+            <input type="checkbox" data-grup="opinio" value="si" />
+            <span>Només jocs amb opinió</span>
+          </label>
+        </div>
+      )}
+
       <details class="grup">
         <summary>Disponibilitat</summary>
         <div class="cos">
@@ -187,6 +200,7 @@ const compteText = (n: number) => `${n} ${n === 1 ? 'joc' : 'jocs'}`;
             data-mec={f.d.mecaniques.join(' ')}
             data-tema={f.d.temes.join(' ')}
             data-estat={f.d.estat}
+            data-opinio={f.teOpinio ? 'si' : ''}
             data-jmin={f.d.jugadors_min}
             data-jmax={f.d.jugadors_max}
             data-durada={f.durada ?? ''}
@@ -211,6 +225,9 @@ const compteText = (n: number) => `${n} ${n === 1 ? 'joc' : 'jocs'}`;
                   </li>
                 ))}
                 {f.d.tipus.map((t) => <li class="tag">{etiqueta(t)}</li>)}
+                {f.teOpinio && (
+                  <li class="tag opinio"><a href={`/jocs/${f.joc.id}/#opinio`}>Amb opinió</a></li>
+                )}
               </ul>
             </article>
           </li>
@@ -236,7 +253,7 @@ const compteText = (n: number) => `${n} ${n === 1 ? 'joc' : 'jocs'}`;
   const edat = document.getElementById('edat') as HTMLInputElement;
 
   const items = Array.from(llista.children) as HTMLLIElement[];
-  const GRUPS = ['motiu', 'dep', 'tipus', 'mec', 'tema', 'estat'] as const;
+  const GRUPS = ['motiu', 'dep', 'tipus', 'mec', 'tema', 'estat', 'opinio'] as const;
   type Grup = (typeof GRUPS)[number];
 
   const caselles = (g: Grup) =>

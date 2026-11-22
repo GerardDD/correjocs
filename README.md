@@ -60,6 +60,56 @@ npm run verificacions   # escriu VERIFICACIONS-PENDENTS.md
 només publica `src/pages/` i `public/`). No s'edita a mà: quan un punt queda
 comprovat, es treu del `verificar:` de la fitxa i es torna a generar.
 
+## Opinions personals
+
+Les opinions van **a part de les fitxes**, a `src/content/opinions/`. La fitxa
+diu què és el joc (dades verificables); l'opinió diu què en pensem. Així no es
+barregen mai.
+
+**Un fitxer per joc, amb el mateix nom que la fitxa**: l'opinió de
+`src/content/jocs/panda-spin.md` és `src/content/opinions/panda-spin.md`.
+
+Per crear-ne una:
+
+```bash
+npm run opinio -- panda-spin
+```
+
+Crea el fitxer a partir de `_plantilla.md`, amb la data d'avui i **en
+esborrany**. L'omples, treus `esborrany: true` i, quan arribi a `main`, es
+publica. També es pot fer des del web de GitHub copiant la plantilla.
+
+```yaml
+---
+data: 2026-11-22
+veredicte: "Una frase que resumeixi què en penses."   # obligatori, màx. 160
+nota: 4                      # opcional, d'1 a 5, admet mitges
+partides: 6                  # opcional
+jugadors_provats: [2, 4]     # opcional
+ideal_per: "famílies amb criatures a partir de 8 anys"   # opcional
+a_favor: ["…"]               # opcional
+en_contra: ["…"]             # opcional
+# actualitzada: 2027-01-10   # si la reescrius
+# autoria: "MrBr."           # per defecte
+---
+
+El text, en Markdown. Tot el que hi escriguis es publica.
+```
+
+On surt:
+
+- **A la fitxa del joc**, en un bloc propi al final, marcat com a opinió
+  personal (`/jocs/<nom>/#opinio`).
+- **Al catàleg**, amb l'etiqueta *Amb opinió* i un filtre *Només jocs amb
+  opinió* (`?opinio=si`). El filtre només apareix quan n'hi ha almenys una.
+- **A `/opinions/`**, de la més recent a la més antiga.
+
+Regles que fa complir la compilació:
+
+- Si una opinió no té fitxa de joc amb el mateix nom, **la compilació falla**.
+- Una opinió en esborrany, o d'un joc en esborrany, no surt enlloc.
+- Els fitxers que comencen per `_` no es carreguen mai.
+
 ## Vocabularis
 
 A `dades/mecaniques.yml`, `dades/temes.yml` i `dades/tipus.yml`. Cada terme té

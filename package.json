@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "verificacions": "node scripts/verificacions.mjs"
+    "verificacions": "node scripts/verificacions.mjs",
+    "opinio": "node scripts/nova-opinio.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
