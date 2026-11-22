@@ -180,8 +180,16 @@ const opinions = defineCollection({
       // Qui la signa. Per defecte, el titular del web.
       autoria: z.string().default('MrBr.'),
 
-      // Una frase que resumeixi l'opinió. Surt a la llista d'opinions.
-      veredicte: z.string().max(160),
+      // Una frase que resumeixi l'opinió, opcional. Si hi és, surt a la fitxa
+      // i a la llista d'opinions. La compilació falla si s'hi deixa el text de
+      // la plantilla, perquè no es torni a publicar per error.
+      veredicte: z
+        .string()
+        .max(160)
+        .refine((v) => !v.startsWith('Una frase que resumeixi'), {
+          message: "El veredicte encara és el text de la plantilla: escriu-ne un o esborra la línia.",
+        })
+        .optional(),
 
       // Nota opcional d'1 a 5 (admet mitges: 3.5). Si no la poses, no surt.
       nota: z

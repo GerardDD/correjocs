@@ -42,7 +42,7 @@ const data = (v: Date) =>
               {o.data.autoria} · {data(o.data.actualitzada ?? o.data.data)}
               {o.data.nota ? ` · ${notaText(o.data.nota)}` : ''}
             </p>
-            <p class="resum">{o.data.veredicte}</p>
+            {o.data.veredicte && <p class="resum">{o.data.veredicte}</p>}
           </article>
         </li>
       ))}

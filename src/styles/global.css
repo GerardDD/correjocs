@@ -190,7 +190,6 @@ button:hover { border-color: var(--accent); color: var(--accent); }
   border-top: 3px solid var(--accent); border-radius: var(--radius);
 }
 .opinio-bloc h2 { margin-top: 0; }
-.opinio-avis { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); margin: -0.4rem 0 1rem; }
 .veredicte { font-size: 1.15rem; font-style: italic; margin: 0 0 0.75rem; }
 .nota { font-family: var(--sans); font-size: 0.9rem; color: var(--muted); margin: 0 0 0.75rem; }
 .nota strong { color: var(--accent); }

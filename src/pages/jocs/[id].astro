@@ -196,11 +196,7 @@ const totsManuals = [
     {o && OpinioText && (
       <section class="opinio-bloc" id="opinio" aria-labelledby="opinio-titol">
         <h2 id="opinio-titol">L'opinió de {o.autoria}</h2>
-        <p class="opinio-avis">
-          Opinió personal. Les dades de més amunt són verificables; això no.
-        </p>
-
-        <p class="veredicte">{o.veredicte}</p>
+        {o.veredicte && <p class="veredicte">{o.veredicte}</p>}
 
         {o.nota && (
           <p class="nota">Nota: <strong>{notaText(o.nota)}</strong></p>
