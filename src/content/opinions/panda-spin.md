@@ -15,12 +15,12 @@ nota: 4                      # d'1 a 5, admet mitges (3.5). Sense nota, no en su
 jugadors_provats: [3, 4]     # amb quants jugadors l'has provat
 ideal_per: "entre sessions de jocs més durs, o per omplir una estoneta"
 
- a_favor:
-   - "Velocitat del joc"
-	- Il·lustracions
-	- Mecànica principal
- en_contra:
-   - "Atzar puntualment pot arruinar la ronda d'algun jugador"
+a_favor:
+  - "Velocitat del joc"
+  - "Il·lustracions"
+  - "Mecànica principal"
+en_contra:
+  - "Atzar puntualment pot arruinar la ronda d'algun jugador"
 
 # autoria: "MrBr."            # per defecte ja és aquesta; canvia-la si escriu algú altre
 esborrany: false                # posa-ho a false (o esborra la línia) per publicar-la
