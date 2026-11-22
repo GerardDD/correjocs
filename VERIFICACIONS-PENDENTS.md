@@ -4,7 +4,7 @@
 fitxa; per canviar-hi res, canvia la fitxa i torna a executar
 `npm run verificacions`.
 
-*Generat el 22 de novembre del 2026 — 92 punts en 23 fitxes.*
+*Generat el 22 de novembre del 2026 — 90 punts en 23 fitxes.*
 
 Aquestes notes **no es publiquen**: ni a la pàgina del joc ni al catàleg.
 Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
@@ -137,9 +137,7 @@ Quan un punt quedi comprovat, treu-lo del `verificar:` de la fitxa.
 
 - [ ] Any original: BGG el data el 2024 i algunes botigues el 2025.
 - [ ] Any de l'edició de 2Tomatoes: el web de l'editorial anunciava el llançament per al 30 d'octubre del 2025; TCG Factory hi posa el 27/02/2026.
-- [ ] Reglament i cartes en català: ho diu el Gerard, i Mathom i TCG Factory hi posen castellà i català. Si 2Tomatoes en publica el PDF català, afegir-lo i el motiu manual.
 - [ ] Dependència de l'idioma: posada a baixa perquè les cartes porten text; revisar-ho amb el joc a la mà.
-- [ ] Mecàniques: és un joc d'escalada i bases amb gestió de mà, termes que el vocabulari no té.
 - [ ] Durada: el fabricant diu 25-40 min; TCG Factory, 30-45.
 
 ## Panots

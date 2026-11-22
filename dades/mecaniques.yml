@@ -53,3 +53,7 @@
   etiqueta: Mosaic
 - id: paraules
   etiqueta: Paraules i llenguatge
+- id: bases
+  etiqueta: Bases
+- id: escalada
+  etiqueta: Escalada

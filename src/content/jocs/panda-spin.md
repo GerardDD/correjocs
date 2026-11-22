@@ -20,7 +20,7 @@ durada_min: 25
 durada_max: 40
 edat_min: 14
 dependencia_idioma: baixa
-mecaniques: []
+mecaniques: [bases, escalada]
 temes: [animals]
 tipus: [cartes]
 estat: disponible
@@ -34,9 +34,7 @@ revisat: 2026-11-22
 verificar:
   - "Any original: BGG el data el 2024 i algunes botigues el 2025."
   - "Any de l'edició de 2Tomatoes: el web de l'editorial anunciava el llançament per al 30 d'octubre del 2025; TCG Factory hi posa el 27/02/2026."
-  - "Reglament i cartes en català: ho diu el Gerard, i Mathom i TCG Factory hi posen castellà i català. Si 2Tomatoes en publica el PDF català, afegir-lo i el motiu manual."
   - "Dependència de l'idioma: posada a baixa perquè les cartes porten text; revisar-ho amb el joc a la mà."
-  - "Mecàniques: és un joc d'escalada i bases amb gestió de mà, termes que el vocabulari no té."
   - "Durada: el fabricant diu 25-40 min; TCG Factory, 30-45."
 ---
 
